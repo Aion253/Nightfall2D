@@ -25,6 +25,7 @@ public class Nightfall2D {
 	private List<SplashScreen> splashes = new ArrayList<SplashScreen>();
 	
 	public Nightfall2D(NightfallGame game, String name, int pixelSize, int width, int height, int maxFPS) {
+		System.setProperty("sun.java2d.opengl", "true");
 		display = new DisplayManager(name, width, height, pixelSize, this);
 		startMillis = System.currentTimeMillis();
 		this.game = game;
@@ -37,6 +38,7 @@ public class Nightfall2D {
 	}
 	
 	public Nightfall2D(NightfallGame game, String name, int pixelSize, int width, int height) {
+		System.setProperty("sun.java2d.opengl", "true");
 		display = new DisplayManager(name, width, height, pixelSize, this);
 		startMillis = System.currentTimeMillis();
 		this.game = game;
@@ -45,7 +47,7 @@ public class Nightfall2D {
 		game.initialize(display);
 		System.out.println("Nightfall2D: initialized!");
 		running = true;
-		SplashScreen n2splash = new SplashScreen(this, "Nightfall 2D", "C:/Users/wrpar/Desktop/Other/Aion/nightfall/nightfall-pregame.png", 3000);
+		SplashScreen n2splash = new SplashScreen(this, "Nightfall 2D", "res/nightfall-pregame.png", 3000);
 		timer.scheduleAtFixedRate(new NightfallPeriodic(this), 0, (long) Math.ceil((1000/maxFPS)));
 	}
 	

@@ -1,6 +1,8 @@
 package net.aionstudios.n2d.drawing;
 
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 
 public class NImage {
@@ -10,6 +12,9 @@ public class NImage {
 	private int height;
 	
 	public NImage(BufferedImage image, int width, int height) {
+		BufferedImage img = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration()
+				.createCompatibleImage(width, height, Transparency.TRANSLUCENT);
+		img.setAccelerationPriority(1);
 		this.width = width;
 		this.height = height;
 		this.setBImage(image);

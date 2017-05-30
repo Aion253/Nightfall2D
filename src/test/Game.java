@@ -11,6 +11,7 @@ import net.aionstudios.n2d.DisplayManager;
 import net.aionstudios.n2d.audio.AudioManager;
 import net.aionstudios.n2d.bounds.BoundingBox;
 import net.aionstudios.n2d.drawing.Sprite;
+import net.aionstudios.n2d.entity.ClickableEntity;
 import net.aionstudios.n2d.entity.Entity;
 import net.aionstudios.n2d.game.NightfallGame;
 import net.aionstudios.n2d.movement.Vector2f;
@@ -18,6 +19,7 @@ import net.aionstudios.n2d.movement.Vector2f;
 public class Game extends NightfallGame {
 
 	private Entity sprite;
+	private ClickableEntity ce;
 	boolean wP = false;
 	boolean aP = false;
 	boolean sP = false;
@@ -26,14 +28,14 @@ public class Game extends NightfallGame {
 	public Game(String name, int pixelSize, int width, int height) {
 		super(name, pixelSize, width, height);
 		// TODO Auto-generated constructor stub
-		Clip clip = AudioManager.loadSound("C:\\Users\\wrpar\\Desktop\\Applications\\audios\\onecallaway_audio.wav");
-		AudioManager.playSound(clip);
+		//Clip clip = AudioManager.loadSound();
+		//AudioManager.playSound(clip);
 		//AudioManager.stopSound(clip);
 	}
 
 	@Override
 	public void initialize(DisplayManager dm) {
-		sprite = new Entity(new Sprite("n2", "C:\\Users\\wrpar\\Desktop\\Other\\Ariadne_Files\\10.png", 10),
+		sprite = new Entity(new Sprite("n2", "res/10.png", 10),
 				new Vector2f(5,5), new BoundingBox(22, 22));
 				KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 
@@ -75,6 +77,19 @@ public class Game extends NightfallGame {
 		                }
 		            }
 		        });
+				ce = new ClickableEntity(new Sprite("res/squared.png"), new Sprite("res/squared.png"), new Sprite("res/squared-w.png"), new Vector2f(5,5), new BoundingBox(183, 183)) {
+
+					@Override
+					public void clicked() {
+						System.out.println("clicked");
+					}
+
+					@Override
+					public void hovered() {
+						System.out.println("hovered");
+					}
+				
+				};
 	}
 
 	@Override
@@ -92,6 +107,7 @@ public class Game extends NightfallGame {
 			sprite.getPosition().addX(40f*getNightfall().frameTimeMillis()/1000);
 		}
 		sprite.render(dm, new Point(0,0), new Point(sprite.getSprite().getWidth(), sprite.getSprite().getHeight()), false);
+		ce.render(dm, false);
 	}
 
 	@Override
