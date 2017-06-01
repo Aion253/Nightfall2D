@@ -28,7 +28,12 @@ public class Drawer extends Canvas {
 	}
 	
 	public void draw() {
-		paint(this.getBufferStrategy().getDrawGraphics());
+		BufferStrategy bs = this.getBufferStrategy(); 
+		if (bs == null) {
+		       this.createBufferStrategy(2); 
+		       bs = this.getBufferStrategy(); 
+		}
+		paint(bs.getDrawGraphics());
 	}
 	
 	@Override
