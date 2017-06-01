@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import net.aionstudios.n2d.DisplayManager;
 import net.aionstudios.n2d.bounds.BoundingBox;
+import net.aionstudios.n2d.bounds.BoundsOperations;
 import net.aionstudios.n2d.drawing.Sprite;
 import net.aionstudios.n2d.movement.Vector2f;
 
@@ -27,6 +28,25 @@ public abstract class ClickableEntity extends Entity {
 	
 	@Override
 	public void render(DisplayManager dm, boolean ignorePxlSize) {
+		this.setClicked(false);
+		this.setHovered(false);
+		System.out.println(dm.getRelativeMousePosition());
+		System.out.println(this.getPosition().getX());
+		System.out.println(this.getPosition().getY());
+		System.out.println(this.getBounds().getWidth());
+		System.out.println(this.getBounds().getHeight());
+		System.out.println(dm.isMouseActive());
+		System.out.println(dm.isMouseDown());
+		if(dm.isMouseActive()) {
+			if(BoundsOperations.pointBetweenPoints(dm.getRelativeMousePosition(), new Point((int) this.getPosition().getX(), (int) this.getPosition().getY()), new Point((int) this.getPosition().getX() + this.getBounds().getWidth(), (int) this.getPosition().getY() + this.getBounds().getHeight()))) {
+				this.setHovered(true);
+				this.hovered();
+				if(dm.isMouseDown()) {
+					this.setClicked(true);
+					this.clicked();
+				}
+			}
+		}
 		if(hovered && clicked) {
 			getClickSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 		} else if (hovered) {
@@ -38,6 +58,18 @@ public abstract class ClickableEntity extends Entity {
 	
 	@Override
 	public void render(DisplayManager dm, Point topLeft, Point bottomRight, boolean ignorePxlSize) {
+		this.setClicked(false);
+		this.setHovered(false);
+		if(dm.isMouseActive()) {
+			if(BoundsOperations.pointBetweenPoints(dm.getRelativeMousePosition(), new Point((int) this.getPosition().getX(), (int) this.getPosition().getY()), new Point((int) this.getPosition().getX() + this.getBounds().getWidth(), (int) this.getPosition().getY() + this.getBounds().getHeight()))) {
+				this.setHovered(true);
+				this.hovered();
+				if(dm.isMouseDown()) {
+					this.setClicked(true);
+					this.clicked();
+				}
+			}
+		}
 		if(hovered && clicked) {
 			getClickSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), topLeft, bottomRight, ignorePxlSize);
 		} else if (hovered) {

@@ -13,6 +13,8 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import net.aionstudios.n2d.bounds.BoundsOperations;
 import net.aionstudios.n2d.drawing.Drawer;
 
 public class DisplayManager extends Frame {
@@ -21,9 +23,7 @@ public class DisplayManager extends Frame {
 	private GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 	private Drawer drawer;
 	private int pixelSize = 1;
-	
 	private boolean mouseDown = false;
-	private boolean mouseActive = false;
 	
 	public DisplayManager(String title, int width, int height, int pixelSize, Nightfall2D n2d) {
 		this.drawer = new Drawer(this, pixelSize);
@@ -42,23 +42,19 @@ public class DisplayManager extends Frame {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				mouseDown = true;
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				mouseActive = true;
+			public void mouseEntered(MouseEvent e) {
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				mouseActive = false;
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				mouseDown = true;
 			}
 
 			@Override
@@ -73,13 +69,13 @@ public class DisplayManager extends Frame {
 	}
 	
 	public Point getRelativeMousePosition() {
-	    int x = this.getX() - MouseInfo.getPointerInfo().getLocation().x;
-	    int y = this.getY() - MouseInfo.getPointerInfo().getLocation().y;
+	    int x = MouseInfo.getPointerInfo().getLocation().x-this.getX();
+	    int y = MouseInfo.getPointerInfo().getLocation().y-this.getY();
 	    return new Point(x, y);
 	}
 	
 	public boolean isMouseActive() {
-		return mouseActive;
+		return BoundsOperations.pointBetweenPoints(getRelativeMousePosition(), new Point(0,0), new Point(this.getWidth(), this.getHeight()));
 	}
 	
 	public boolean isMouseDown() {
