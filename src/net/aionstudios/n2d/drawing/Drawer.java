@@ -3,6 +3,8 @@ package net.aionstudios.n2d.drawing;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +19,69 @@ public class Drawer extends Canvas {
 	private static List<Point> point = new ArrayList<Point>();
 	private static List<Boolean> ignorePixelSize = new ArrayList<Boolean>();
 	private int pixelSize = 1;
+	private boolean mouseDown = false;
 	
 	public Drawer(DisplayManager dm) {
 		this.setDisplay(dm);
+		addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseDown = true;
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				mouseDown = false;
+			}
+			
+		});
 	}
 	
 	public Drawer(DisplayManager dm, int pixelSize) {
 		this.setDisplay(dm);
 		this.pixelSize = pixelSize;
+		addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseDown = true;
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				mouseDown = false;
+			}
+			
+		});
+	}
+	
+	public boolean isMouseDown() {
+		return mouseDown;
 	}
 	
 	public void draw() {

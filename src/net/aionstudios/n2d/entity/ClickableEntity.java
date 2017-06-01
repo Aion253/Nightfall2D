@@ -37,15 +37,13 @@ public abstract class ClickableEntity extends Entity {
 				if(dm.isMouseDown()) {
 					this.setClicked(true);
 					this.clicked();
+					getClickSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
+				} else {
+					getHoverSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 				}
+			} else {
+				getSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 			}
-		}
-		if(hovered && clicked) {
-			getClickSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
-		} else if (hovered) {
-			getHoverSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
-		} else {
-			getSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 		}
 	}
 	
@@ -60,15 +58,13 @@ public abstract class ClickableEntity extends Entity {
 				if(dm.isMouseDown()) {
 					this.setClicked(true);
 					this.clicked();
+					getClickSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
+				} else {
+					getHoverSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 				}
+			} else {
+				getSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 			}
-		}
-		if(hovered && clicked) {
-			getClickSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), topLeft, bottomRight, ignorePxlSize);
-		} else if (hovered) {
-			getHoverSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), topLeft, bottomRight, ignorePxlSize);
-		} else {
-			getSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), topLeft, bottomRight, ignorePxlSize);
 		}
 	}
 

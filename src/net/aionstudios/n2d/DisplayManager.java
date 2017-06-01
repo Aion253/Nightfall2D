@@ -38,31 +38,6 @@ public class DisplayManager extends Frame {
 				n2d.terminateEngine();
 			}
 		});
-		addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				mouseDown = true;
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				mouseDown = false;
-			}
-			
-		});
 		setLocationRelativeTo(null);
 		setVisible(true);
 		this.pixelSize = pixelSize;
@@ -79,7 +54,7 @@ public class DisplayManager extends Frame {
 	}
 	
 	public boolean isMouseDown() {
-		return mouseDown;
+		return drawer.isMouseDown();
 	}
 	
 	public int getPixelSize() {
