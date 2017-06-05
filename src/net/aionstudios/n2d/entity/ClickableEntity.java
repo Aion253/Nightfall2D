@@ -28,43 +28,61 @@ public abstract class ClickableEntity extends Entity {
 	
 	@Override
 	public void render(DisplayManager dm, boolean ignorePxlSize) {
-		this.setClicked(false);
-		this.setHovered(false);
 		if(dm.isMouseActive()) {
-			if(BoundsOperations.pointBetweenPoints(dm.getRelativeMousePosition(), new Point((int) this.getPosition().getX(), (int) this.getPosition().getY()), new Point((int) this.getPosition().getX() + this.getBounds().getWidth(), (int) this.getPosition().getY() + this.getBounds().getHeight()))) {
+			if(BoundsOperations.pointBetweenPoints(dm.getRelativeMousePosition(), new Point((int) this.getPosition().getX()*dm.getPixelSize(), (int) this.getPosition().getY()*dm.getPixelSize()), new Point((int) this.getPosition().getX()*dm.getPixelSize() + this.getBounds().getWidth()*dm.getPixelSize(), (int) this.getPosition().getY()*dm.getPixelSize() + this.getBounds().getHeight()*dm.getPixelSize()))) {
+				if(this.hovered == false) {
+					this.hovered();
+				}
 				this.setHovered(true);
-				this.hovered();
 				if(dm.isMouseDown()) {
+					if(this.clicked == false) {
+						this.clicked();
+					}
 					this.setClicked(true);
-					this.clicked();
 					getClickSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 				} else {
+					this.setClicked(false);
 					getHoverSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 				}
 			} else {
+				this.setHovered(false);
+				this.setClicked(false);
 				getSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 			}
+		} else {
+			this.setHovered(false);
+			this.setClicked(false);
+			getSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 		}
 	}
 	
 	@Override
 	public void render(DisplayManager dm, Point topLeft, Point bottomRight, boolean ignorePxlSize) {
-		this.setClicked(false);
-		this.setHovered(false);
 		if(dm.isMouseActive()) {
-			if(BoundsOperations.pointBetweenPoints(dm.getRelativeMousePosition(), new Point((int) this.getPosition().getX(), (int) this.getPosition().getY()), new Point((int) this.getPosition().getX() + this.getBounds().getWidth(), (int) this.getPosition().getY() + this.getBounds().getHeight()))) {
+			if(BoundsOperations.pointBetweenPoints(dm.getRelativeMousePosition(), new Point((int) this.getPosition().getX()*dm.getPixelSize(), (int) this.getPosition().getY()*dm.getPixelSize()), new Point((int) this.getPosition().getX()*dm.getPixelSize() + this.getBounds().getWidth()*dm.getPixelSize(), (int) this.getPosition().getY()*dm.getPixelSize() + this.getBounds().getHeight()*dm.getPixelSize()))) {
+				if(this.hovered == false) {
+					this.hovered();
+				}
 				this.setHovered(true);
-				this.hovered();
 				if(dm.isMouseDown()) {
+					if(this.clicked == false) {
+						this.clicked();
+					}
 					this.setClicked(true);
-					this.clicked();
 					getClickSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 				} else {
+					this.setClicked(false);
 					getHoverSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 				}
 			} else {
+				this.setHovered(false);
+				this.setClicked(false);
 				getSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 			}
+		} else {
+			this.setHovered(false);
+			this.setClicked(false);
+			getSprite().render(dm, Math.round(getPosition().getX()), Math.round(getPosition().getY()), ignorePxlSize);
 		}
 	}
 
