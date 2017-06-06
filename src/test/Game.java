@@ -25,8 +25,8 @@ public class Game extends NightfallGame {
 	boolean sP = false;
 	boolean dP = false;
 	
-	public Game(String name, int pixelSize, int width, int height) {
-		super(name, pixelSize, width, height);
+	public Game(String name, int pixelSize, int width, int height, boolean resizable) {
+		super(name, pixelSize, width, height, resizable);
 		// TODO Auto-generated constructor stub
 		//Clip clip = AudioManager.loadSound();
 		//AudioManager.playSound(clip);
@@ -94,17 +94,18 @@ public class Game extends NightfallGame {
 
 	@Override
 	public void process(DisplayManager dm) {
+		sprite.setVelocity(new Vector2f(0,0));
 		if(wP) {
-			sprite.getPosition().addY(-40f*getNightfall().frameTimeMillis()/1000);
+			sprite.addVelocityY(-40f);
 		}
 		if(sP) {
-			sprite.getPosition().addY(40f*getNightfall().frameTimeMillis()/1000);
+			sprite.addVelocityY(40f);
 		}
 		if(aP) {
-			sprite.getPosition().addX(-40f*getNightfall().frameTimeMillis()/1000);
+			sprite.addVelocityX(-40f);
 		}
 		if(dP) {
-			sprite.getPosition().addX(40f*getNightfall().frameTimeMillis()/1000);
+			sprite.addVelocityX(40f);
 		}
 		sprite.render(dm, new Point(0,0), new Point(sprite.getSprite().getWidth(), sprite.getSprite().getHeight()), false);
 		ce.render(dm, false);

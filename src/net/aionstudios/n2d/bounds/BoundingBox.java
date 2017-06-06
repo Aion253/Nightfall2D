@@ -1,12 +1,11 @@
 package net.aionstudios.n2d.bounds;
 
-import net.aionstudios.n2d.entity.Entity;
-import net.aionstudios.n2d.game.NightfallGame;
-
 public class BoundingBox {
 	
 	private int width = 0;
 	private int height = 0;
+	
+	private boolean nocollide = false;
 	
 	public BoundingBox(int width, int height) {
 		this.width = width;
@@ -27,6 +26,14 @@ public class BoundingBox {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	public boolean isNocollide() {
+		return nocollide;
+	}
+
+	public void setNocollide(boolean nocollide) {
+		this.nocollide = nocollide;
 	}
 	
 }

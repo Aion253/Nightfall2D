@@ -21,17 +21,20 @@ public class DisplayManager extends Frame {
 	
 	private GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	private GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
+	private Nightfall2D n2d;
 	private Drawer drawer;
 	private int pixelSize = 1;
 	private boolean mouseDown = false;
 	
-	public DisplayManager(String title, int width, int height, int pixelSize, Nightfall2D n2d) {
+	public DisplayManager(String title, int width, int height, int pixelSize, Nightfall2D n2d, boolean resizable) {
 		this.drawer = new Drawer(this, pixelSize);
 		this.drawer.setSize(width*pixelSize, height*pixelSize);
 		this.drawer.setBackground(Color.BLACK);
+		this.n2d = n2d;
 		setSize(width*pixelSize, height*pixelSize);
 		add(this.drawer);
 		setTitle(title);
+		setResizable(resizable);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent we) {
@@ -63,6 +66,10 @@ public class DisplayManager extends Frame {
 
 	public void setPixelSize(int pixelSize) {
 		this.pixelSize = pixelSize;
+	}
+
+	public Nightfall2D getNightfall() {
+		return n2d;
 	}
 
 	public Drawer getDrawer() {

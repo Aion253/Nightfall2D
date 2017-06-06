@@ -13,6 +13,7 @@ public class Entity {
 	private Vector2f position = new Vector2f(0,0);
 	private Sprite sprite;
 	private BoundingBox bounds;
+	private Vector2f velocity = new Vector2f(0,0);
 	
 	public Entity(Sprite sprite, Vector2f position, BoundingBox bounds) {
 		this.sprite = sprite;
@@ -44,11 +45,31 @@ public class Entity {
 		this.bounds = bounds;
 	}
 	
+	public Vector2f getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(Vector2f velocity) {
+		this.velocity = velocity;
+	}
+	
+	public void addVelocityX(float x) {
+		this.velocity.addX(x);
+	}
+	
+	public void addVelocityY(float y) {
+		this.velocity.addY(y);
+	}
+
 	public void render(DisplayManager dm, boolean ignorePxlSize) {
+		this.getPosition().addX(velocity.getX()*dm.getNightfall().frameTimeMillis()/1000);
+		this.getPosition().addY(velocity.getY()*dm.getNightfall().frameTimeMillis()/1000);
 		sprite.render(dm, Math.round(position.getX()), Math.round(position.getY()), ignorePxlSize);
 	}
 	
 	public void render(DisplayManager dm, Point topLeft, Point bottomRight, boolean ignorePxlSize) {
+		this.getPosition().addX(velocity.getX()*dm.getNightfall().frameTimeMillis()/1000);
+		this.getPosition().addY(velocity.getY()*dm.getNightfall().frameTimeMillis()/1000);
 		sprite.render(dm, Math.round(position.getX()), Math.round(position.getY()), topLeft, bottomRight, ignorePxlSize);
 	}
 

@@ -7,12 +7,12 @@ public abstract class NightfallGame {
 	
 	private Nightfall2D nightfall;
 	
-	public NightfallGame(String name, int pixelSize, int width, int height, int maxFPS) {
-		nightfall = new Nightfall2D(this, name, pixelSize, width, height, maxFPS);
+	public NightfallGame(String name, int pixelSize, int width, int height, int maxFPS, boolean resizable) {
+		nightfall = new Nightfall2D(this, name, pixelSize, width, height, maxFPS, resizable);
 	}
 	
-	public NightfallGame(String name, int pixelSize, int width, int height) {
-		nightfall = new Nightfall2D(this, name, pixelSize, width, height);
+	public NightfallGame(String name, int pixelSize, int width, int height, boolean resizable) {
+		nightfall = new Nightfall2D(this, name, pixelSize, width, height, resizable);
 	}
 	
 	/**
