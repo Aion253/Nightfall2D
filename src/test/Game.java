@@ -1,5 +1,6 @@
 package test;
 
+import java.awt.Color;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Point;
@@ -94,6 +95,7 @@ public class Game extends NightfallGame {
 
 	@Override
 	public void process(DisplayManager dm) {
+		dm.getDrawer().setBackground(Color.CYAN);
 		sprite.setVelocity(new Vector2f(0,0));
 		if(wP) {
 			sprite.addVelocityY(-40f);

@@ -1,5 +1,6 @@
 package net.aionstudios.n2d;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,7 @@ public class Nightfall2D {
 			}
 			lastFrame = frameStart;
 		} else {
+			this.getDisplay().getDrawer().setBackground(Color.BLACK);
 			renderSplash(splashes.get(0));
 		}
 	}
