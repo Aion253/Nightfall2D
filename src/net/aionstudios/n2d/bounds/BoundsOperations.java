@@ -31,20 +31,18 @@ public class BoundsOperations {
 	public static void undoCollide(Entity entity, Entity collisionRelative, List<Point> points) {
 		float vx = entity.getVelocity().getX();
 		float vy = entity.getVelocity().getY();
-		Point prev = new Point((int) (-entity.getVelocity().getX()), (int) (-entity.getVelocity().getY()));
-		if(vx>vy) {
-			if(prev.getX()>points.get(0).getX()) {
-				entity.setPosition(new Vector2f((float) (entity.getPosition().getX()-points.get(0).getX()), (float) (entity.getPosition().getY())));
+		if(vx>0) {
+			if(vx<points.get(0).getX()) {
+				entity.setPosition(new Vector2f((float) (entity.getPosition().getX()-points.get(0).getX()), entity.getPosition().getY()));
 			} else {
-				entity.setPosition(new Vector2f((float) (entity.getPosition().getX()-prev.getX()), (float) (entity.getPosition().getY())));
-			}
-			if(prev.getY()>points.get(0).getY()) {
-				entity.setPosition(new Vector2f((float) (entity.getPosition().getX()), (float) (entity.getPosition().getY()-points.get(0).getY())));
-			} else {
-				entity.setPosition(new Vector2f((float) (entity.getPosition().getX()), (float) (entity.getPosition().getY()-prev.getY())));
+				entity.setPosition(new Vector2f((float) (entity.getPosition().getX()-vx), entity.getPosition().getY()));
 			}
 		} else {
-			
+			if(vx<(-points.get(1).getX())) {
+				entity.setPosition(new Vector2f((float) (entity.getPosition().getX()+points.get(1).getX()), entity.getPosition().getY()));
+			} else {
+				entity.setPosition(new Vector2f((float) (entity.getPosition().getX()-vx), entity.getPosition().getY()));
+			}
 		}
 	}
 
